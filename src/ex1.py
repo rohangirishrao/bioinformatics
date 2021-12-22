@@ -128,14 +128,14 @@ def map_reads(filename1: str, filename2: str):
 
 if __name__ == "__main__":
     # Uncomment this line if you want to run the script from the IDE
-    DIRECTORY = "../tests/test_files"
-    # DIRECTORY = "tests/test_files"
+    # DIRECTORY = "../tests/test_files"
+    DIRECTORY = "tests/test_files"
     file1 = os.path.join(DIRECTORY, "sequencesfasta.sec")
     file2 = os.path.join(DIRECTORY, "genomefasta.sec")
 
     # Same here to run from an editor
-    file3 = os.path.join("../", "Aligned.out.fasta")
-    # file3 = os.path.join("", "Aligned.out.fasta")
+    # file3 = os.path.join("../", "Aligned.out.fasta")
+    file3 = os.path.join("", "Aligned.out.fasta")
 
     h, tup = parse_fasta(file1)
     print("Sequences in sequencesfasta.sec:\n ", tup)
