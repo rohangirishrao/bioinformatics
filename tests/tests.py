@@ -1,6 +1,6 @@
 import os
 import pytest
-from ex1 import *
+from src.ex1 import *
 
 """
 Test method to test the parse_fasta method
@@ -9,13 +9,12 @@ Test method to test the parse_fasta method
 
 
 def test_parse():
-    directory = "C:\\Users\\droon\\OneDrive\\Desktop\\UNI\\Semester 5\\" \
-                "Programming in Bioinformatics\\Exercises Block 3\\tests\\test_files"
+    directory: str = "test_files"
     fname = os.path.join(directory, "ref.fasta")
     h, s = parse_fasta(fname)
     assert h == ['seq1', 'seq2']
-    assert s == [['ATATATCGATTATCATCGTCGATCGTATTAT'],
-                 ['ATTAGTCGATAGCTATTTAAATGCTCAACCT']]
+    assert s == ['ATATATCGATTATCATCGTCGATCGTATTAT',
+                 'ATTAGTCGATAGCTATTTAAATGCTCAACCT']
 
 
 """
@@ -25,8 +24,7 @@ Test method to test the discard ambiguous seqs method.
 
 
 def test_discard():
-    directory = "C:\\Users\\droon\\OneDrive\\Desktop\\UNI\\Semester 5\\" \
-                "Programming in Bioinformatics\\Exercises Block 3\\tests\\test_files"
+    directory = "test_files"
     fname = os.path.join(directory, "q.fasta")
 
     content = open(fname, 'r')
@@ -44,8 +42,7 @@ Test method to test the nucleotide frequencies method
 
 
 def test_freqs():
-    directory = "C:\\Users\\droon\\OneDrive\\Desktop\\UNI\\Semester 5\\" \
-                "Programming in Bioinformatics\\Exercises Block 3\\tests\\test_files"
+    directory = "test_files"
     fname = os.path.join(directory, "q.fasta")
 
     content = open(fname, 'r')
@@ -55,4 +52,4 @@ def test_freqs():
 
     nf = nucleotide_frequencies(string)
     print(nf)
-    assert nf == (0.12, 0.06, 0.19, 0.31)
+    assert nf == [0.12, 0.06, 0.19, 0.31]

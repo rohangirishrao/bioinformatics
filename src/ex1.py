@@ -23,7 +23,6 @@ def parse_fasta(filename):
     head = None
     seq = ""
 
-
     for l in stuff:
         if l.startswith('>'):
             header.append(l[1:-1])
@@ -170,27 +169,20 @@ Main method to run the parse functions on FASTA files and print nucleotide frequ
 """
 if __name__ == "__main__":
     # Add your directory here
-    directory = "C:/Users/droon/OneDrive/Desktop/UNI/Semester 5/Programming in Bioinformatics/Exercises Block 3/tests/test_files"
+    directory = "..\\tests\\test_files"
     file1 = os.path.join(directory, "sequencesfasta.sec")
     file2 = os.path.join(directory, "genomefasta.sec")
-    # Path of the directory where STAR was run
-    file3 = os.path.join("C:\\Users\\droon\\OneDrive\\Desktop\\UNI\\Semester 5\\Programming in Bioinformatics",
-                         "Aligned.out.fasta")
+    # Path of the directory where STAR was run, assumed to be the main folder
+    file3 = os.path.join("..\\", "Aligned.out.fasta")
 
     h, tup = parse_fasta(file1)
     print("Sequences in sequencesfasta.sec:\n ", tup)
 
     print(map_reads(file1, file2))
 
-    h2, t2 = parse_fasta(file3)
-    print("Nucleotide frequencies for Aligned.out.fasta: \n")
-    seq1 = t2
-    let1 = []
+    h2, seq1 = parse_fasta(file3)
+    print('-------------')
+    print("\nNucleotide frequencies for Aligned.out.fasta: \n")
 
     s1 = discard_ambiguous_seqs(seq1)
     print(printNF(s1))
-    printNF('CTGGTATfaTtAGggT')
-
-    print('-----')
-    nf = nucleotide_frequencies('CTGGTATfaTtAGggT')
-    print(nf)
