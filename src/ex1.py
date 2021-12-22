@@ -1,117 +1,93 @@
-# import numpy as np
+""" Module to run the exercises of session 1 in bioinformatics Block 3"""
 import os
 
-"""
-Method to parse a FASTA file
-Opens a file and reads the content and returns the sequence inside each separate block
-Denoted with '>' header before each sequence
 
-Args:
-    filename (string): name of the file to be parsed
+def parse_fasta(filename: str):
+    """
+    Method to parse a FASTA file
+    Opens a file and reads the content and returns the sequence inside each separate block
+    Denoted with '>' header before each sequence
 
-Return:
-    A tuple with the header line and the sequence
-
-"""
-
-
-def parse_fasta(filename):
+    """
     stuff = open(filename, 'r').readlines()
 
-    header = []
-    sequence = []
+    header: list = []
+    sequence: list = []
     head = None
     seq = ""
 
-    for l in stuff:
-        if l.startswith('>'):
-            header.append(l[1:-1])
+    for line in stuff:
+        if line.startswith('>'):
+            header.append(line[1:-1])
             if head:
                 sequence.append(seq)
             seq = ""
-            head = l[1:]
+            head = line[1:]
         else:
-            seq += l.rstrip()
+            seq += line.rstrip()
     sequence.append(seq)
 
     return header, sequence
 
 
-"""
-Method that discards sequences that don't contain the letters we are looking for
+def discard_ambiguous_seqs(seq: list):
+    """
+    Method that discards sequences that don't contain the letters/nucleotides we are looking for
 
-Args:
-    string (string): string containing all nucleotides
-
-Return:
-    A list of nucleotides that only contain our interesting nucleotides
-
-"""
-
-
-def discard_ambiguous_seqs(seq):
+    """
     string = ""
-    for l in seq:
-        string += l
+    for part in seq:
+        string.join(part)
 
-    resSeq = ""
-    for l in string:
-        if all(x in ('A', 'C', 'G', 'T', 'a', 'c', 'g', 't') for x in l):
-            resSeq += l
-    return resSeq
-
-
-"""
-Method takes a list of strings as input and prints out total frequency of each nucleotide
-
-Args:
-    string (string) : list of strings containing nucleotides
-
-"""
+    result_sequence: str = ""
+    for part in string:
+        if all(x in ('A', 'C', 'G', 'T', 'a', 'c', 'g', 't') for x in part):
+            result_sequence.join(part)
+    return result_sequence
 
 
-def nucleotide_frequencies(string):
+def nucleotide_frequencies(string: str):
+    """
+    Method takes a list of strings as input and prints out total frequency of each nucleotide
+
+    """
     # s = ["ATCGTAAAA", 'GCGCGACTCCC']
-    l = len(string)
-    A = []
-    C = []
-    G = []
-    T = []
+    length = len(string)
+    a_list = []
+    c_list = []
+    g_list = []
+    t_list = []
 
     for char in string:
-        A.append(char.count('A'))
-        C.append(char.count('C'))
-        G.append(char.count('G'))
-        T.append(char.count('T'))
-    Atot = sum(A)
-    Ctot = sum(C)
-    Gtot = sum(G)
-    Ttot = sum(T)
+        a_list.append(char.count('A'))
+        c_list.append(char.count('C'))
+        g_list.append(char.count('G'))
+        t_list.append(char.count('T'))
+    a_total = sum(a_list)
+    c_total = sum(c_list)
+    g_total = sum(g_list)
+    t_total = sum(t_list)
     tot = 0
 
-    for o in range(0, l):
-        for x in range(0, len(string[o])):
+    for i in range(0, length):
+        for j in range(0, len(string[i])):
             tot = tot + 1
 
-    freqA = round(Atot / tot, 2)
-    freqC = round(Ctot / tot, 2)
-    freqG = round(Gtot / tot, 2)
-    freqT = round(Ttot / tot, 2)
+    freq_a = round(a_total / tot, 2)
+    freq_c = round(c_total / tot, 2)
+    freq_g = round(g_total / tot, 2)
+    freq_t = round(t_total / tot, 2)
 
-    res = [freqA, freqC, freqG, freqT]
+    res: list = [freq_a, freq_c, freq_g, freq_t]
 
     return res
 
 
-"""
-Method to calculate and print the nucleotide frequencies.
+def print_frequencies(string: str):
+    """
+    Method to calculate and print the nucleotide frequencies.
 
-Args:
-    string: A string of nucleotides
-"""
-
-
-def printNF(string):
+    """
     freqs = nucleotide_frequencies(string)
 
     print('A: ', freqs[0],
@@ -120,60 +96,50 @@ def printNF(string):
           '\nT: ', freqs[3])
 
 
-"""
-Method takes 2 files and parses them, discarding sequences and printing frequencies. Additionally, returns a dictionary
-of dictionaries, where the outer dictionary uses the names of query sequences as its keys, and the inner dictionary uses
-reference sequence names as keys
-
-Args:
-    filename1 (string): name of first file
-    filename2 (string): name of second file
-    
-Returns: 
-    dic (dictionary): dictionary with query sequences as keys, and inner dict reference sequences
-
-"""
-
-
-def map_reads(filename1, filename2):
-    head1, seq1 = parse_fasta(filename1)
+def map_reads(filename1: str, filename2: str):
+    """
+    Method takes 2 files and parses them, discarding sequences and printing frequencies.
+    Additionally, returns a dictionary of dictionaries, where the outer dictionary uses
+    the names of query sequences as its keys, and the inner dictionary uses reference
+    sequence names as keys
+    """
+    head1, sequence1 = parse_fasta(filename1)
     head2, seq2 = parse_fasta(filename2)
     indices = []
 
-    s1 = discard_ambiguous_seqs(seq1)
-    s2 = discard_ambiguous_seqs(seq2)
+    das1 = discard_ambiguous_seqs(sequence1)
+    das2 = discard_ambiguous_seqs(seq2)
 
     print('Nucleotide frequencies for sequencesfasta.sec :')
-    printNF(s1)
+    print_frequencies(das1)
     print('Nucleotide frequencies for genomesfasta.sec :')
-    printNF(s2)
+    print_frequencies(das2)
 
-    for l in seq1:
-        for x in seq2:
-            if l in x:
-                index = x.index(l)
+    for seqpart in sequence1:
+        for part in seq2:
+            if seqpart in part:
+                index = part.index(seqpart)
             else:
                 index = 0
             indices.append(index)
 
     ind_list = [indices[i:i + len(seq2)] for i in range(0, len(indices), len(seq2))]
 
-    dic = {k: {v1: v2} for k, v1, v2 in zip(head1, head2, ind_list)}
+    dic: dict = {k: {v1: v2} for k, v1, v2 in zip(head1, head2, ind_list)}
 
     return dic
 
 
-"""
-Main method to run the parse functions on FASTA files and print nucleotide frequencies.
-
-"""
 if __name__ == "__main__":
-    # Add your directory here
-    directory = "..\\tests\\test_files"
-    file1 = os.path.join(directory, "sequencesfasta.sec")
-    file2 = os.path.join(directory, "genomefasta.sec")
-    # Path of the directory where STAR was run, assumed to be the main folder
-    file3 = os.path.join("..\\", "Aligned.out.fasta")
+    # Uncomment this line if you want to run the script from the IDE
+    # directory = "../tests/test_files"
+    DIRECTORY = "tests/test_files"
+    file1 = os.path.join(DIRECTORY, "sequencesfasta.sec")
+    file2 = os.path.join(DIRECTORY, "genomefasta.sec")
+
+    # Same here to run from an editor
+    # file3 = os.path.join("../", "Aligned.out.fasta")
+    file3 = os.path.join("", "Aligned.out.fasta")
 
     h, tup = parse_fasta(file1)
     print("Sequences in sequencesfasta.sec:\n ", tup)
@@ -184,5 +150,5 @@ if __name__ == "__main__":
     print('-------------')
     print("\nNucleotide frequencies for Aligned.out.fasta: \n")
 
-    s1 = discard_ambiguous_seqs(seq1)
-    print(printNF(s1))
+    S1 = discard_ambiguous_seqs(seq1)
+    print(print_frequencies(S1))

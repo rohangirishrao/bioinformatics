@@ -1,7 +1,9 @@
 #!/bin/bash
+echo "Running script for ex1: "
+    python3 src/ex1.py
 
 echo "Running commands for Exercise 2: "
-echo "Please make sure that STAR was run in the Exercises Block 3 Folder"
+echo "Please make sure that STAR was run in the bioinformatics main folder"
 echo "How many alignments were reported?"
     grep -v "@" Aligned.out.sam | wc -l
 echo "How many reads were uniquely mapped?"

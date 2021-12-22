@@ -5,8 +5,12 @@ This is the README that contains instructions and answers to the exercises of Bl
 ### Exercise 1
 The code for the first exercise is in the folder marked src under ex1.py.
 
-To run the code, replace the string on line 164 in ex1.py to the directory of the location of the files and run the script.
+To run the code, running the bash script `run_me.sh` should run the script ex1.py and the tests. If this does not work,
+the reason could be because of the path chosen, as the IDE I used needed different path signifiers than a command line. 
 
+The current state of the code is to be run from the BASH script. If you wish to run it from an editor, please uncomment
+the lines 148 and 154, as the path that an editor needs isn't the same as the path that the bash script needs, for whatever reason. 
+I tried to fix this issue, but somehow the path is taken from the location of the bash script and not the script path.
 
 From the result of map_reads, we can see that some sequences do not appear in others. The final sequence, which is the shortest one, 
 is the one that has the most presence in others. The first few have multiple 0's in them. This makes sense, as the final sequence is 
