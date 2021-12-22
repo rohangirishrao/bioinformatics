@@ -1,4 +1,8 @@
 #!/bin/bash
+echo "Ex1.py"
+python3 src/ex1.py
+echo "Test"
+python3 tests/tests.py
 
 echo "Running commands for Exercise 2: "
 echo "Please make sure that STAR was run in the bioinformatics main folder"
