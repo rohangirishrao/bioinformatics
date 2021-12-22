@@ -37,12 +37,12 @@ def discard_ambiguous_seqs(seq: list):
     """
     string = ""
     for part in seq:
-        string.join(part)
+        string += part
 
     result_sequence: str = ""
     for part in string:
         if all(x in ('A', 'C', 'G', 'T', 'a', 'c', 'g', 't') for x in part):
-            result_sequence.join(part)
+            result_sequence += part
     return result_sequence
 
 
@@ -67,11 +67,7 @@ def nucleotide_frequencies(string: str):
     c_total = sum(c_list)
     g_total = sum(g_list)
     t_total = sum(t_list)
-    tot = 0
-
-    for i in range(0, length):
-        for j in range(0, len(string[i])):
-            tot = tot + 1
+    tot = length
 
     freq_a = round(a_total / tot, 2)
     freq_c = round(c_total / tot, 2)
@@ -132,14 +128,14 @@ def map_reads(filename1: str, filename2: str):
 
 if __name__ == "__main__":
     # Uncomment this line if you want to run the script from the IDE
-    # directory = "../tests/test_files"
-    DIRECTORY = "tests/test_files"
+    DIRECTORY = "../tests/test_files"
+    # DIRECTORY = "tests/test_files"
     file1 = os.path.join(DIRECTORY, "sequencesfasta.sec")
     file2 = os.path.join(DIRECTORY, "genomefasta.sec")
 
     # Same here to run from an editor
-    # file3 = os.path.join("../", "Aligned.out.fasta")
-    file3 = os.path.join("", "Aligned.out.fasta")
+    file3 = os.path.join("../", "Aligned.out.fasta")
+    # file3 = os.path.join("", "Aligned.out.fasta")
 
     h, tup = parse_fasta(file1)
     print("Sequences in sequencesfasta.sec:\n ", tup)

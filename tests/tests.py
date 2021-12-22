@@ -28,9 +28,12 @@ def test_discard():
     content = open(fname, 'r')
     string = content.read()
     content.close()
+    list_of = []
+    for stuff in string:
+        list_of.append(stuff)
 
-    seq = discard_ambiguous_seqs(string)
-    assert seq == ['C', 'T', 'G', 'G', 'T', 'A', 'T', 'a', 'T', 't', 'A', 'G', 'g', 'g', 'T']
+    seq = discard_ambiguous_seqs(list_of)
+    assert seq == 'CTGGTATaTtAGggT'
 
 
 def test_freqs():
