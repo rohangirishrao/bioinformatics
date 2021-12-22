@@ -1,4 +1,4 @@
-name: bioinfo
+name: bioinformatics
 channels:
   - defaults
 dependencies: 
