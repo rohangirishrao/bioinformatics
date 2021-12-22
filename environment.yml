@@ -4,5 +4,6 @@ channels:
 dependencies: 
  - python = 3.8
  - os
- - numpy
+ - pylint
+ - pytest
 prefix: C:\Users\droon\anaconda3\envs\bioinfo
