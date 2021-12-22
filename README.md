@@ -9,7 +9,7 @@ To run the code, running the bash script `run_me.sh` should run the script ex1.p
 the reason could be because of the path chosen, as the IDE I used needed different path signifiers than a command line. 
 
 The current state of the code is to be run from the BASH script. If you wish to run it from an editor, please uncomment
-the lines 148 and 154, as the path that an editor needs isn't the same as the path that the bash script needs, for whatever reason. 
+the lines 135 and 141, as the path that an editor needs isn't the same as the path that the bash script needs, for whatever reason. 
 I tried to fix this issue, but somehow the path is taken from the location of the bash script and not the script path.
 
 From the result of map_reads, we can see that some sequences do not appear in others. The final sequence, which is the shortest one, 
