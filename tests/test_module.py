@@ -1,6 +1,10 @@
 """ Test module to test all the methods of ex1.py"""
 import os
+from pathlib import Path
+
 from src.ex1 import parse_fasta, discard_ambiguous_seqs, nucleotide_frequencies
+
+directory: Path = Path(__file__).parents[0] / "test_files"
 
 
 def test_parse():
@@ -8,9 +12,7 @@ def test_parse():
     Test method to test the parse_fasta method
 
     """
-
-    directory: str = "test_files"
-    fname: str = os.path.join(directory, "ref.fasta")
+    fname: str = str(directory / "ref.fasta")
     header, seqeunce = parse_fasta(fname)
     assert header == ['seq1', 'seq2']
     assert seqeunce == ['ATATATCGATTATCATCGTCGATCGTATTAT',
@@ -22,8 +24,7 @@ def test_discard():
     Test method to test the discard ambiguous seqs method.
 
     """
-    directory: str = "test_files"
-    fname = os.path.join(directory, "q.fasta")
+    fname: str = str(directory / "q.fasta")
 
     content = open(fname, 'r')
     string = content.read()
@@ -41,8 +42,7 @@ def test_freqs():
     Test method to test the nucleotide frequencies method
 
     """
-    directory: str = "test_files"
-    fname = os.path.join(directory, "q.fasta")
+    fname: str = str(directory / "q.fasta")
 
     content = open(fname, 'r')
     string = content.read()
