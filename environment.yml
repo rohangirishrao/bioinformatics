@@ -1,9 +1,7 @@
-name: bioinformatics
+name: pib21-rohan
 channels:
   - defaults
-dependencies: 
+dependencies:
  - python = 3.8
- - os
  - pylint
  - pytest
-prefix: C:\Users\droon\anaconda3\envs\bioinfo
