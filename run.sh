@@ -21,6 +21,6 @@ echo "How many reads could not be mapped?"
 
 echo "Exercise 3: FASTA/FASTQ files have been created "
     cat Aligned.out.sam | grep -v ^@ | awk 'NR%2==1 {print "@"$1"\n"$10"\n+\n"$11}' > Aligned.out.fastq
-    sed -n '1~4s/^@/>/p;2~4p' Aligned.out.fastq > Aligned.out.fasta
+    
 
 
