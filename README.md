@@ -12,19 +12,20 @@ The current state of the code is to be run from the BASH script. If you wish to 
 the lines 131 and 137, as the path that an editor needs isn't the same as the path that the bash script needs, for whatever reason. 
 I tried to fix this issue, but somehow the path is taken from the location of the bash script and not the script path.
 
-#### 1.1
-Generate genome: 
-`STAR --runthreadN 8 --runMode genomeGenerate --genomeDir GenomeDir --genomeFastaFiles Mus_musculus.GRCm38.dna_rm.chr19.fa --sjdbGTFfile Mus_musculus.GRCm38.88_chr19_pc.gtf --sjdbOverhang 99`
 
-Mapping: 
-`STAR --runthreadN 8 --genomeDir GenomeDir --readFilesIn reads.mate_1.fq reads.mate_2.fq`
 
 From the result of map_reads, we can see that some sequences do not appear in others. The final sequence, which is the shortest one, 
 is the one that has the most presence in others. The first few have multiple 0's in them. This makes sense, as the final sequence is 
 far shorter than the others, making it more likely to occur in the others than the first few sequences.
 
 ### Exercise 2
-The commands for running STAR are taken from the STARManual and are written above.
+Generate genome (2.1): 
+
+`STAR --runthreadN 8 --runMode genomeGenerate --genomeDir GenomeDir --genomeFastaFiles Mus_musculus.GRCm38.dna_rm.chr19.fa --sjdbGTFfile Mus_musculus.GRCm38.88_chr19_pc.gtf --sjdbOverhang 99`
+
+Mapping (2.2): 
+
+`STAR --runthreadN 8 --genomeDir GenomeDir --readFilesIn reads.mate_1.fq reads.mate_2.fq`
 
 Additionally, please make sure that STAR was run in the main folder, as the script assumes the `Aligned.out.sam` is in this folder.
 #### 2.2
